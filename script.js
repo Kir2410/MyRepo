@@ -1,0 +1,10 @@
+let title = "Name";
+let screens;
+let screenPrice;
+let rollback;
+let fullPrice;
+let adaptive;
+
+alert("Hello world!");
+
+console.log('First console message');
