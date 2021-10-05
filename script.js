@@ -5,7 +5,7 @@ let rollback = 70;
 let fullPrice = 10000;
 let adaptive = true;
 
-// alert("Hello world!");
+alert("Hello world!");
 
 console.log('First console message');
 
