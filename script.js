@@ -1,4 +1,4 @@
-let title = "Name";
+let title;
 let screens;
 let screenPrice;
 let rollback;
