@@ -1,9 +1,9 @@
-let title = 'MyRepo';
-let screens = 'Простые, Сложные, Интерактивные';
-let screenPrice = 2500;
-let rollback = 70;
-let fullPrice = 10000;
-let adaptive = true;
+const title = 'MyRepo';
+const screens = 'Простые, Сложные, Интерактивные';
+const screenPrice = 2500;
+const rollback = 70;
+const fullPrice = 10000;
+const adaptive = true;
 
 alert("Hello world!");
 
