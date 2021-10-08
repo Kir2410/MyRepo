@@ -48,10 +48,3 @@ console.log("Стоимость услуги за вычетом отката: "
 console.log("Полная стоимость: " + fullPrice);
 console.log(screens.split(' '));
 
-// console.log("Название проекта: " + getTitle(title));
-// console.log("Стоимость работы: " + screenPrice);
-// console.log("Необходимость в адаптиве: " + adaptive);
-// console.log("Дополнительная услуга: " + service1);
-// console.log("Стоимость услуги: " + servicePrice1);
-// console.log("Дополнительная услуга: " + service2);
-// console.log("Стоимость услуги: " + servicePrice2);
