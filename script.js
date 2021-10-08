@@ -10,14 +10,14 @@ const servicePrice2 = prompt("Сколько это будет стоить?");
 const fullPrice = screenPrice + servicePrice1 + servicePrice2;
 const servicePercentPrice = Math.ceil(fullPrice - (fullPrice * (rollback/100)));
 
-console.log(title);
-console.log(screens);
-console.log(screenPrice);
-console.log(adaptive);
-console.log(service1);
-console.log(servicePrice1);
-console.log(service2);
-console.log(servicePrice2);
+console.log("Название проекта: " + title);
+console.log("Типы экранов: " + screens);
+console.log("Стоимость работы: " + screenPrice);
+console.log("Необходимость в адаптиве: " + adaptive);
+console.log("Дополнительная услуга: " + service1);
+console.log("Стоимость услуги: " + servicePrice1);
+console.log("Дополнительная услуга: " + service2);
+console.log("Стоимость услуги: " + servicePrice2);
 console.log(servicePercentPrice);
 
 if (fullPrice >= 30000) {
