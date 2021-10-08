@@ -1,27 +1,33 @@
-const rollback = 68;
+'use strict';
+
+const rollback = 15;
 const title = prompt("Как называется ваш проект?");
 const screens = prompt("Какие типы экранов нужно разработать?");
-const screenPrice = prompt("Сколько будет стоить данная работа?");
-const adaptive = !!prompt("Нужен ли адаптив на сайте?");
+const screenPrice = +prompt("Сколько будет стоить данная работа?");
+const adaptive = confirm("Нужен ли адаптив на сайте?");
 const service1 = prompt("Какой дополнительный тип услуги нужен?");
-const servicePrice1 = prompt("Сколько это будет стоить?");
+const servicePrice1 = +prompt("Сколько это будет стоить?");
 const service2 = prompt("Какой дополнительный тип услуги нужен?");
-const servicePrice2 = prompt("Сколько это будет стоить?");
-const fullPrice = screenPrice + servicePrice1 + servicePrice2;
-const servicePercentPrice = Math.ceil(fullPrice - (fullPrice * (rollback/100)));
+const servicePrice2 = +prompt("Сколько это будет стоить?");
 
-console.log("Название проекта: " + title);
-console.log("Типы экранов: " + screens);
-console.log("Стоимость работы: " + screenPrice);
-console.log("Необходимость в адаптиве: " + adaptive);
-console.log("Дополнительная услуга: " + service1);
-console.log("Стоимость услуги: " + servicePrice1);
-console.log("Дополнительная услуга: " + service2);
-console.log("Стоимость услуги: " + servicePrice2);
-console.log(servicePercentPrice);
+const getAllServicePrices = function() {
+    return servicePrice1 + servicePrice2;
+};
+
+function getFullPrice() {
+    return screenPrice + allServicePrices;
+}
+
+const allServicePrices = getAllServicePrices();
+const fullPrice = getFullPrice();
+const servicePercentPrice = fullPrice - (fullPrice * (rollback/100));
+
+function getTitle(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
 
 if (fullPrice >= 30000) {
-    console.log("Даем скидку в 10%"); 
+    console.log("Даем скидку в 10%");         
 } else {
     if (fullPrice >= 15000 && fullPrice < 30000) {
         console.log("Даем скидку в 5%"); 
@@ -33,3 +39,19 @@ if (fullPrice >= 30000) {
         }
     }
 }
+
+console.log(typeof title);
+console.log(typeof fullPrice);
+console.log(typeof adaptive);
+console.log("Типы экранов: " + screens);
+console.log("Стоимость услуги за вычетом отката: " + servicePercentPrice);
+console.log("Полная стоимость: " + fullPrice);
+console.log(screens.split(' '));
+
+// console.log("Название проекта: " + getTitle(title));
+// console.log("Стоимость работы: " + screenPrice);
+// console.log("Необходимость в адаптиве: " + adaptive);
+// console.log("Дополнительная услуга: " + service1);
+// console.log("Стоимость услуги: " + servicePrice1);
+// console.log("Дополнительная услуга: " + service2);
+// console.log("Стоимость услуги: " + servicePrice2);
