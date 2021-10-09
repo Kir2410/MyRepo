@@ -46,5 +46,5 @@ console.log(typeof adaptive);
 console.log("Типы экранов: " + screens);
 console.log("Стоимость услуги за вычетом отката: " + servicePercentPrice);
 console.log("Полная стоимость: " + fullPrice);
-console.log(screens.split(' '));
+console.log(screens.split(', '));
 
