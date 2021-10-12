@@ -16,6 +16,10 @@ const isNumber = function(num) {
     return !isNaN(parseFloat(num)) && isFinite(num);
 };
 
+const showTypeOf = function(variable) {
+    console.log(variable, typeof variable);
+};
+
 const asking = function() {
     title = prompt("Как называется ваш проект?", "Калькулятор верстки" );
     screens = prompt("Какие типы экранов нужно разработать?", "Простые, сложные");
@@ -79,9 +83,10 @@ if (fullPrice >= 30000) {
     }
 }
 
-console.log(typeof title);
-console.log(typeof screenPrice);
-console.log(typeof adaptive);
+showTypeOf(title);
+showTypeOf(screenPrice);
+showTypeOf(adaptive);
+
 console.log("Типы экранов: " + screens);
 console.log("Стоимость услуги за вычетом отката: " + servicePercentPrice);
 console.log("Полная стоимость: " + fullPrice);
