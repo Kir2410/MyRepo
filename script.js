@@ -21,11 +21,16 @@ const appData = {
 
     asking: function () {
         appData.title = prompt("Как называется ваш проект?", "Калькулятор верстки");
+        while (isNumber(appData.title)) {
+            appData.title = prompt("Как называется ваш проект?", "Калькулятор верстки");
+        }
 
         for (let i = 0; i < 2; i++) {
             let name = prompt("Какие типы экранов нужно разработать?", "Простые, сложные");
+            while (isNumber(appData.title)) {
+                name = prompt("Какие типы экранов нужно разработать?", "Простые, сложные");
+            }
             let price = +prompt("Сколько будет стоить данная работа?");
-
             while (!isNumber(price)) {
                 price = +prompt("Сколько будет стоить данная работа?");
             }
@@ -39,6 +44,9 @@ const appData = {
 
         for (let i = 0; i < 2; i++) {
             let name = prompt("Какой дополнительный тип услуги нужен?");
+            while (isNumber(appData.title)) {
+                name = prompt("Какой дополнительный тип услуги нужен?");
+            }
             let price = 0;
             price = prompt("Сколько это будет стоить?");
             while (!isNumber(price)) {
