@@ -5,12 +5,20 @@ const appData = {
     screens: "",
     screenPrice: 0,
     adaptive: true,
-    rollback: 15,
+    rollback: 10,
     allServicePrices: 0,
     fullPrice: 0,
     servicePercentPrice: 0,
     service1: "",
     service2: "",
+    start: function () {
+        appData.asking();
+        appData.allServicePrices = appData.getAllServicePrices();
+        appData.fullPrice = appData.getFullPrice();
+        appData.servicePercentPrice = appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
+        appData.title = appData.getTitle();
+        appData.logger();
+    },
 
     asking: function () {
         appData.title = prompt("Как называется ваш проект?", "Калькулятор верстки");
@@ -20,14 +28,6 @@ const appData = {
             appData.screenPrice = +prompt("Сколько будет стоить данная работа?");
         }
         appData.adaptive = confirm("Нужен ли адаптив на сайте?");
-    },
-
-    getFullPrice: function () {
-        return appData.screenPrice + appData.allServicePrices;
-    },
-
-    getTitle: function (str) {
-        return appData.title.trim()[0].toUpperCase() + appData.title.trim().substr(1).toLowerCase();
     },
 
     getAllServicePrices: function () {
@@ -48,6 +48,14 @@ const appData = {
         return sum;
     },
 
+    getFullPrice: function () {
+        return appData.screenPrice + appData.allServicePrices;
+    },
+
+    getTitle: function (str) {
+        return appData.title.trim()[0].toUpperCase() + appData.title.trim().substr(1).toLowerCase();
+    },
+
     getRollbackMessage: function (price) {
         if (price >= 30000) {
             console.log("Даем скидку в 10%");
@@ -62,15 +70,6 @@ const appData = {
                 }
             }
         }
-    },
-
-    start: function () {
-        appData.asking();
-        appData.allServicePrices = appData.getAllServicePrices();
-        appData.fullPrice = appData.getFullPrice();
-        appData.servicePercentPrice = appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
-        appData.title = appData.getTitle();
-        appData.logger();
     },
 
     logger: function () {
