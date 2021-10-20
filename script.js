@@ -24,7 +24,6 @@ const appData = {
         while (isNumber(appData.title)) {
             appData.title = prompt("Как называется ваш проект?", "Калькулятор верстки");
         }
-
         for (let i = 0; i < 2; i++) {
             let name = prompt("Какие типы экранов нужно разработать?", "Простые, сложные");
             while (isNumber(appData.title)) {
