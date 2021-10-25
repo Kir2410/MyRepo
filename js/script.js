@@ -5,7 +5,7 @@ const buttons = document.getElementsByClassName('handler_btn');
 const plus = document.querySelector('.screen-btn');
 const percent = document.querySelectorAll('.other-items.percent');
 const number = document.querySelectorAll('.other-items.number');
-const range = document.querySelector('.rollback').querySelector('input');
+const range = document.querySelector('.rollback input');
 const span = document.querySelector('.rollback').querySelector('.range-value');
 
 const input1 = document.getElementsByClassName('total-input')[0];
