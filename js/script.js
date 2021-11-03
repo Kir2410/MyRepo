@@ -23,6 +23,7 @@ const appData = {
     title: "",
     screens: [],
     screenPrice: 0,
+    screenCount: 0,
     adaptive: true,
     rollback: 0,
     servicePricesPercent: 0,
@@ -44,13 +45,12 @@ const appData = {
         appData.addScreens();
         appData.addServices();
         appData.addPrices();
-        // appData.getServicePercentPrice();
         // appData.logger();
         appData.showResults();
     },
     showResults: function () {
         total.value = appData.screenPrice;
-        // totalCount.value = appData.fullPrice;
+        totalCount.value = appData.screenCount;
         totalCountOther.value = appData.servicePricesPercent + appData.servicePricesNumber;
         fullTotalCount.value = +appData.fullPrice;
         totalCountRollback.value = appData.servicePercentPrice;
@@ -65,9 +65,14 @@ const appData = {
             appData.screens.push({
                 id: index,
                 name: selectName,
-                price: +select.value * +input.value
+                price: +select.value * +input.value,
+                count: +input.value
             });
+
         });
+        appData.screenCount = appData.screens.reduce(function (total, elem) {
+            return total + elem.count;
+        }, 0);
     },
     addServices: function () {
         percent.forEach(function (item) {
