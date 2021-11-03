@@ -24,7 +24,7 @@ const appData = {
     screens: [],
     screenPrice: 0,
     adaptive: true,
-    rollback: 10,
+    rollback: 0,
     servicePricesPercent: 0,
     servicePricesNumber: 0,
     fullPrice: 0,
@@ -35,6 +35,7 @@ const appData = {
         appData.addTitle();
         startBtn.addEventListener('click', appData.start);
         plus.addEventListener('click', appData.addScreenBlock);
+        inputRange.addEventListener('input', appData.addRollback);
     },
     addTitle: function () {
         document.title = title.textContent;
@@ -49,8 +50,10 @@ const appData = {
     },
     showResults: function () {
         total.value = appData.screenPrice;
+        // totalCount.value = appData.fullPrice;
         totalCountOther.value = appData.servicePricesPercent + appData.servicePricesNumber;
         fullTotalCount.value = +appData.fullPrice;
+        totalCountRollback.value = appData.servicePercentPrice;
     },
     addScreens: function () {
         screens = document.querySelectorAll('div.screen');
@@ -111,14 +114,18 @@ const appData = {
         }
 
         for (let key in appData.servicesPercent) {
-            appData.servicePricesPercent += appData.screenPrice * appData.servicesPercent[key] / 100;
+            appData.servicePricesPercent += appData.screenPrice * (appData.servicesPercent[key] / 100);
         }
 
         appData.fullPrice = appData.screenPrice + appData.servicePricesNumber + appData.servicePricesPercent;
+        appData.servicePercentPrice = appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
+
     },
 
-    getServicePercentPrice: function () {
-        appData.servicePercentPrice = appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
+    addRollback: function (event) {
+        console.log(event.target.value);
+        inputRangeValue.textContent = event.target.value + " %";
+        appData.rollback = event.target.value;
     },
 
     logger: function () {
