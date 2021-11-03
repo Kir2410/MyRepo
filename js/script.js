@@ -47,6 +47,7 @@ const appData = {
         appData.addPrices();
         // appData.logger();
         appData.showResults();
+        inputRange.addEventListener('input', appData.createRollback);
     },
     showResults: function () {
         total.value = appData.screenPrice;
@@ -135,6 +136,11 @@ const appData = {
     addRollback: function (event) {
         inputRangeValue.textContent = event.target.value + " %";
         appData.rollback = event.target.value;
+    },
+
+    createRollback: function (event) {
+        appData.rollback = event.target.value;
+        totalCountRollback.value = appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
     },
 
     logger: function () {
