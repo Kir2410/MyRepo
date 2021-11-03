@@ -70,9 +70,6 @@ const appData = {
             });
 
         });
-        appData.screenCount = appData.screens.reduce(function (total, elem) {
-            return total + elem.count;
-        }, 0);
     },
     addServices: function () {
         percent.forEach(function (item) {
@@ -113,6 +110,9 @@ const appData = {
         appData.screenPrice = appData.screens.reduce(function (total, elem) {
             return total + elem.price;
         }, 0);
+        appData.screenCount = appData.screens.reduce(function (total, elem) {
+            return total + elem.count;
+        }, 0);
 
         for (let key in appData.servicesNumber) {
             appData.servicePricesNumber += appData.servicesNumber[key];
@@ -124,6 +124,7 @@ const appData = {
 
         appData.fullPrice = appData.screenPrice + appData.servicePricesNumber + appData.servicePricesPercent;
         appData.servicePercentPrice = appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
+
 
     },
 
