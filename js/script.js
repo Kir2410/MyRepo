@@ -62,12 +62,16 @@ const appData = {
             let input = screen.querySelector('input');
             let selectName = select.options[select.selectedIndex].textContent;
 
-            appData.screens.push({
-                id: index,
-                name: selectName,
-                price: +select.value * +input.value,
-                count: +input.value
-            });
+            if (select.value !== "" && input.value !== "") {
+                appData.screens.push({
+                    id: index,
+                    name: selectName,
+                    price: +select.value * +input.value,
+                    count: +input.value
+                });
+            } else {
+                alert('Заполните пустые поля!');
+            }
 
         });
     },
@@ -129,7 +133,6 @@ const appData = {
     },
 
     addRollback: function (event) {
-        console.log(event.target.value);
         inputRangeValue.textContent = event.target.value + " %";
         appData.rollback = event.target.value;
     },
