@@ -121,22 +121,6 @@ const appData = {
         appData.servicePercentPrice = appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
     },
 
-    getRollbackMessage: function (price) {
-        if (price >= 30000) {
-            console.log("Даем скидку в 10%");
-        } else {
-            if (price >= 15000 && price < 30000) {
-                console.log("Даем скидку в 5%");
-            } else {
-                if (price < 15000 && price >= 0) {
-                    console.log("Скидка не предусмотрена");
-                } else {
-                    console.log("Что-то пошло не так");
-                }
-            }
-        }
-    },
-
     logger: function () {
         console.log(appData.fullPrice);
         console.log(appData.servicePercentPrice);
