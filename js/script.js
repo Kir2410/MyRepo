@@ -163,6 +163,7 @@ const appData = {
         appData.resetScreenBlock();
         appData.resetRollback();
         appData.init();
+        
     },
     resetResults: function (){
         total.value = 0;
