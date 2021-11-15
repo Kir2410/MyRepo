@@ -62,7 +62,7 @@ const appData = {
     },
     addScreens: function () {
         screens = document.querySelectorAll('div.screen');
-        screens.forEach(function (screen, index) {
+        screens.forEach((screen, index) => {
             let select = screen.querySelector('select');
             let input = screen.querySelector('input');
             let selectName = select.options[select.selectedIndex].textContent;
@@ -83,7 +83,7 @@ const appData = {
         });
     },
     addServices: function () {
-        percent.forEach(function (item) {
+        percent.forEach(item => {
             const check = item.querySelector('input[type=checkbox]');
             const label = item.querySelector('label');
             const input = item.querySelector('input[type=text]');
@@ -93,7 +93,7 @@ const appData = {
             }
         });
 
-        number.forEach(function (item) {
+        number.forEach(item => {
             const check = item.querySelector('input[type=checkbox]');
             const label = item.querySelector('label');
             const input = item.querySelector('input[type=text]');
@@ -109,10 +109,10 @@ const appData = {
         screens[screens.length - 1].after(cloneScreens);
     },
     addPrices: function () {
-        this.screenPrice = this.screens.reduce(function (total, elem) {
+        this.screenPrice = this.screens.reduce((total, elem) => {
             return total + elem.price;
         }, 0);
-        this.screenCount = this.screens.reduce(function (total, elem) {
+        this.screenCount = this.screens.reduce((total, elem) => {
             return total + elem.count;
         }, 0);
 
@@ -142,10 +142,10 @@ const appData = {
         appData.resetResults();
 
         // сбросить все введенные значения
-        percent.forEach(function (item) {
+        percent.forEach(item => {
             item.querySelector('input[type=checkbox]').checked = false;
         });
-        number.forEach(function (item) {
+        number.forEach(item => {
             item.querySelector('input[type=checkbox]').checked = false;
         });
 
@@ -153,7 +153,7 @@ const appData = {
         appData.resetScreenBlock();
 
         // заблокировать поля ввода
-        screens.forEach(function (screen) {
+        screens.forEach(screen => {
             screen.querySelector('select').disabled = false;
             screen.querySelector('input').disabled = false;
         });
@@ -191,7 +191,7 @@ const appData = {
         screens = document.querySelectorAll('div.screen');
         appData.screens.splice(1);
 
-        screens.forEach(function (screen) {
+        screens.forEach(screen => {
             let select = screen.querySelector('select');
             let input = screen.querySelector('input');
 
@@ -206,14 +206,14 @@ const appData = {
     },
 
     logger: function () {
-        console.log(appData.fullPrice);
-        console.log(appData.servicePercentPrice);
-        console.log(appData.screens);
-        console.log("screenPrice методом reduce: " + appData.screenPrice);
-        console.log(appData.services);
+        console.log(this.fullPrice);
+        console.log(this.servicePercentPrice);
+        console.log(this.screens);
+        console.log("screenPrice методом reduce: " + this.screenPrice);
+        console.log(this.services);
 
-        for (let prop in appData) {
-            console.log(prop + " = " + appData[prop]);
+        for (let prop in this) {
+            console.log(prop + " = " + this[prop]);
         }
     }
 };
