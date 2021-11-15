@@ -76,6 +76,7 @@ const appData = {
                 });
             } else {
                 alert('Заполните пустые поля!');
+                this.addScreens();
             }
             select.disabled = true;
             input.disabled = true;
@@ -87,9 +88,6 @@ const appData = {
             const label = item.querySelector('label');
             const input = item.querySelector('input[type=text]');
 
-            // console.log(check);
-            // console.log(label);
-            // console.log(input);
             if (check.checked) {
                 appData.servicesPercent[label.textContent] = +input.value;
             }
@@ -99,10 +97,6 @@ const appData = {
             const check = item.querySelector('input[type=checkbox]');
             const label = item.querySelector('label');
             const input = item.querySelector('input[type=text]');
-
-            // console.log(check);
-            // console.log(label);
-            // console.log(input);
 
             if (check.checked) {
                 appData.servicesNumber[label.textContent] = +input.value;
@@ -144,26 +138,36 @@ const appData = {
         totalCountRollback.value = appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
     },
     reset: function () {
-        resetBtn.style.display = 'none';
-        startBtn.style.display = 'block';
-        
-        appData.screens = document.querySelectorAll('div.screen');
-        
-        appData.screens.forEach(function (screen) {
-            screen.querySelector('select').disabled = false;
-            screen.querySelector('input').disabled = false;
-        });
+        // сбросить результаты
+        appData.resetResults();
+
+        // сбросить все введенные значения
         percent.forEach(function (item) {
             item.querySelector('input[type=checkbox]').checked = false;
         });
         number.forEach(function (item) {
             item.querySelector('input[type=checkbox]').checked = false;
         });
-        appData.resetResults();
+
+        // удалить лишние блоки
         appData.resetScreenBlock();
+
+        // заблокировать поля ввода
+        screens.forEach(function (screen) {
+            screen.querySelector('select').disabled = false;
+            screen.querySelector('input').disabled = false;
+        });
+
+        // сбросить range
         appData.resetRollback();
-        appData.init();
-        
+
+        // скрыть сброс и раскрыть расчитать
+        resetBtn.style.display = 'none';
+        startBtn.style.display = 'block';
+
+        console.log(appData.screens);
+        console.log(screens);
+
     },
     resetResults: function (){
         total.value = 0;
@@ -171,16 +175,29 @@ const appData = {
         totalCountOther.value = 0;
         fullTotalCount.value = 0;
         totalCountRollback.value = 0;
+        this.screenPrice = 0;
+        this.screenCount = 0;
+        this.servicePricesPercent = 0;
+        this.servicePricesNumber = 0;
+        this.fullPrice = 0;
+        this.servicePercentPrice = 0;
     },
     resetScreenBlock: function () {
-        if (screens.length > 1) {
-            screens[screens.length - 1].remove();
-        }             
-        console.dir(total.value);
-        console.dir(totalCount.value);
-        console.dir(totalCountOther.value);
-        console.dir(fullTotalCount.value);
-        console.dir(totalCountRollback.value);
+        let count = screens.length - 1;
+        while (count != 0) {
+            screens[count].remove();
+            count--;
+        };
+        screens = document.querySelectorAll('div.screen');
+        appData.screens.splice(1);
+
+        screens.forEach(function (screen) {
+            let select = screen.querySelector('select');
+            let input = screen.querySelector('input');
+
+            select.value = "";
+            input.value = ""; 
+        })
     },    
     resetRollback: function () {
         inputRange.value = 0;
