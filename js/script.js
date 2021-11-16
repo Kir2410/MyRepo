@@ -36,10 +36,10 @@ const appData = {
     servicesNumber: {},
     init: function () {
         this.addTitle();
-        startBtn.addEventListener('click', this.start.bind(appData));
-        resetBtn.addEventListener('click', this.reset.bind(appData));
-        plus.addEventListener('click', this.addScreenBlock.bind(appData));
-        inputRange.addEventListener('input', this.addRollback.bind(appData));
+        startBtn.addEventListener('click', this.start.bind(this));
+        resetBtn.addEventListener('click', this.reset.bind(this));
+        plus.addEventListener('click', this.addScreenBlock.bind(this));
+        inputRange.addEventListener('input', this.addRollback.bind(this));
     },
     addTitle: function () {
         document.title = title.textContent;
@@ -48,9 +48,9 @@ const appData = {
         this.addScreens();
         this.addServices();
         this.addPrices();
-        // appData.logger();
+        // this.logger();
         this.showResults();
-        inputRange.addEventListener('input', this.createRollback.bind(appData));
+        inputRange.addEventListener('input', this.createRollback.bind(this));
     },
     showResults: function () {
         total.value = this.screenPrice;
@@ -127,11 +127,11 @@ const appData = {
             return total + elem.count;
         }, 0);
 
-        for (let key in appData.servicesNumber) {
+        for (let key in this.servicesNumber) {
             this.servicePricesNumber += this.servicesNumber[key];
         }
 
-        for (let key in appData.servicesPercent) {
+        for (let key in this.servicesPercent) {
             this.servicePricesPercent += this.screenPrice * (this.servicesPercent[key] / 100);
         }
 
