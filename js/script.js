@@ -34,21 +34,21 @@ const appData = {
     servicesNumber: {},
     init: function () {
         this.addTitle();
-        startBtn.addEventListener('click', this.start);
-        resetBtn.addEventListener('click', this.reset);
-        plus.addEventListener('click', this.addScreenBlock);
-        inputRange.addEventListener('input', this.addRollback);
+        startBtn.addEventListener('click', this.start.bind(appData));
+        resetBtn.addEventListener('click', this.reset.bind(appData));
+        plus.addEventListener('click', this.addScreenBlock.bind(appData));
+        inputRange.addEventListener('input', this.addRollback.bind(appData));
     },
     addTitle: function () {
         document.title = title.textContent;
     },
     start: function () {
-        appData.addScreens();
-        appData.addServices();
-        appData.addPrices();
+        this.addScreens();
+        this.addServices();
+        this.addPrices();
         // appData.logger();
-        appData.showResults();
-        inputRange.addEventListener('input', appData.createRollback);
+        this.showResults();
+        inputRange.addEventListener('input', this.createRollback.bind(appData));
 
         startBtn.style.display = 'none';
         resetBtn.style.display = 'block';
@@ -68,7 +68,7 @@ const appData = {
             let selectName = select.options[select.selectedIndex].textContent;
 
             if (select.value !== "" && input.value !== "") {
-                appData.screens.push({
+                this.screens.push({
                     id: index,
                     name: selectName,
                     price: +select.value * +input.value,
@@ -89,9 +89,9 @@ const appData = {
             const input = item.querySelector('input[type=text]');
 
             if (check.checked) {
-                appData.servicesPercent[label.textContent] = +input.value;
+                this.servicesPercent[label.textContent] = +input.value;
             }
-        });
+        }, this);
 
         number.forEach(item => {
             const check = item.querySelector('input[type=checkbox]');
@@ -99,9 +99,9 @@ const appData = {
             const input = item.querySelector('input[type=text]');
 
             if (check.checked) {
-                appData.servicesNumber[label.textContent] = +input.value;
+                this.servicesNumber[label.textContent] = +input.value;
             }
-        });
+        }, this);
 
     },
     addScreenBlock: function () {
@@ -131,15 +131,15 @@ const appData = {
     },
     addRollback: function (event) {
         inputRangeValue.textContent = event.target.value + " %";
-        appData.rollback = event.target.value;
+        this.rollback = event.target.value;
     },
     createRollback: function (event) {
-        appData.rollback = event.target.value;
-        totalCountRollback.value = appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
+        this.rollback = event.target.value;
+        totalCountRollback.value = this.fullPrice - (this.fullPrice * (this.rollback / 100));
     },
     reset: function () {
         // сбросить результаты
-        appData.resetResults();
+        this.resetResults();
 
         // сбросить все введенные значения
         percent.forEach(item => {
@@ -150,7 +150,7 @@ const appData = {
         });
 
         // удалить лишние блоки
-        appData.resetScreenBlock();
+        this.resetScreenBlock();
 
         // заблокировать поля ввода
         screens.forEach(screen => {
@@ -159,13 +159,13 @@ const appData = {
         });
 
         // сбросить range
-        appData.resetRollback();
+        this.resetRollback();
 
         // скрыть сброс и раскрыть расчитать
         resetBtn.style.display = 'none';
         startBtn.style.display = 'block';
 
-        console.log(appData.screens);
+        console.log(this.screens);
         console.log(screens);
 
     },
@@ -189,7 +189,7 @@ const appData = {
             count--;
         };
         screens = document.querySelectorAll('div.screen');
-        appData.screens.splice(1);
+        this.screens.splice(1);
 
         screens.forEach(screen => {
             let select = screen.querySelector('select');
@@ -202,7 +202,7 @@ const appData = {
     resetRollback: function () {
         inputRange.value = 0;
         inputRangeValue.textContent = 0 + " %";
-        appData.rollback = 0;
+        this.rollback = 0;
     },
 
     logger: function () {
