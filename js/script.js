@@ -79,7 +79,7 @@ const appData = {
                 select.disabled = true;
                 input.disabled = true;
             } else {
-                console.log('Заполните пустые поля!');
+                alert('Заполните пустые поля!');
                 this.resetResults();
                 this.screens = [];
                 startBtn.style.display = 'block';
@@ -87,7 +87,6 @@ const appData = {
             };
 
         }, this);
-        console.log(this.screens);
     },
     addServices: function () {
         percent.forEach(item => {
