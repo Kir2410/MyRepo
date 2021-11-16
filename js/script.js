@@ -4,6 +4,8 @@ const title = document.getElementsByTagName('h1')[0];
 const plus = document.querySelector('.screen-btn');
 const percent = document.querySelectorAll('.other-items.percent');
 const number = document.querySelectorAll('.other-items.number');
+// const cmsOpen = document.querySelector('#cms-open');s
+// const cmsSelect = document.querySelector('#cms-select');
 
 const inputRange = document.querySelector('.rollback input');
 const inputRangeValue = document.querySelector('.rollback').querySelector('.range-value');
@@ -49,9 +51,6 @@ const appData = {
         // appData.logger();
         this.showResults();
         inputRange.addEventListener('input', this.createRollback.bind(appData));
-
-        startBtn.style.display = 'none';
-        resetBtn.style.display = 'block';
     },
     showResults: function () {
         total.value = this.screenPrice;
@@ -61,6 +60,9 @@ const appData = {
         totalCountRollback.value = this.servicePercentPrice;
     },
     addScreens: function () {
+        startBtn.style.display = 'none';
+        resetBtn.style.display = 'block';
+
         screens = document.querySelectorAll('div.screen');
         screens.forEach((screen, index) => {
             let select = screen.querySelector('select');
@@ -74,13 +76,18 @@ const appData = {
                     price: +select.value * +input.value,
                     count: +input.value
                 });
+                select.disabled = true;
+                input.disabled = true;
             } else {
-                alert('Заполните пустые поля!');
-                this.addScreens();
-            }
-            select.disabled = true;
-            input.disabled = true;
-        });
+                console.log('Заполните пустые поля!');
+                this.resetResults();
+                this.screens = [];
+                startBtn.style.display = 'block';
+                resetBtn.style.display = 'none';
+            };
+
+        }, this);
+        console.log(this.screens);
     },
     addServices: function () {
         percent.forEach(item => {
@@ -98,11 +105,16 @@ const appData = {
             const label = item.querySelector('label');
             const input = item.querySelector('input[type=text]');
 
+            // if (cmsOpen.checked) {
+            //     document.querySelector('.hidden-cms-variants').style.display = 'flex';
+            //     console.log(cmsSelect.value);
+
+            //     // this.servicesNumber[label.textContent] = +input.value;
+            // }
             if (check.checked) {
                 this.servicesNumber[label.textContent] = +input.value;
             }
         }, this);
-
     },
     addScreenBlock: function () {
         const cloneScreens = screens[0].cloneNode(true);
@@ -138,10 +150,9 @@ const appData = {
         totalCountRollback.value = this.fullPrice - (this.fullPrice * (this.rollback / 100));
     },
     reset: function () {
-        // сбросить результаты
-        this.resetResults();
+        resetBtn.style.display = 'none';
+        startBtn.style.display = 'block';
 
-        // сбросить все введенные значения
         percent.forEach(item => {
             item.querySelector('input[type=checkbox]').checked = false;
         });
@@ -149,27 +160,17 @@ const appData = {
             item.querySelector('input[type=checkbox]').checked = false;
         });
 
-        // удалить лишние блоки
-        this.resetScreenBlock();
 
-        // заблокировать поля ввода
         screens.forEach(screen => {
             screen.querySelector('select').disabled = false;
             screen.querySelector('input').disabled = false;
         });
 
-        // сбросить range
+        this.resetResults();
+        this.resetScreenBlock();
         this.resetRollback();
-
-        // скрыть сброс и раскрыть расчитать
-        resetBtn.style.display = 'none';
-        startBtn.style.display = 'block';
-
-        console.log(this.screens);
-        console.log(screens);
-
     },
-    resetResults: function (){
+    resetResults: function () {
         total.value = 0;
         totalCount.value = 0;
         totalCountOther.value = 0;
@@ -196,9 +197,9 @@ const appData = {
             let input = screen.querySelector('input');
 
             select.value = "";
-            input.value = ""; 
+            input.value = "";
         })
-    },    
+    },
     resetRollback: function () {
         inputRange.value = 0;
         inputRangeValue.textContent = 0 + " %";
