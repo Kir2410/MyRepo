@@ -7,19 +7,18 @@ const DomElement = {
     bg: 'yellow',
     fontSize: '20px',
     createElem: function () {
+        let elem;
         if (this.selector.charAt(0) == '.') {
             document.body.innerHTML = '<div>Привет всем!!!</div>';
-            const elem = document.querySelector('div');
-            elem.classList.add(this.selector.slice(1));
-            elem.style.cssText = `height: ` + this.height + `; width: ` + this.width + `; background: ` + this.bg + `; font-size: ` + this.fontSize + `;`;
+            elem = document.querySelector('div');
         } else {
             if (this.selector.charAt(0) == '#') {
                 document.body.innerHTML = '<p>Привет всем!!!</p>';
-                const elem = document.querySelector('p');
-                elem.classList.add(this.selector.slice(1));
-                elem.style.cssText = `height: ` + this.height + `; width: ` + this.width + `; background: ` + this.bg + `; font-size: ` + this.fontSize + `;`;
+                elem = document.querySelector('p');
             }
-        }
+        };
+        elem.classList.add(this.selector.slice(1));
+        elem.style.cssText = `height: ` + this.height + `; width: ` + this.width + `; background: ` + this.bg + `; font-size: ` + this.fontSize + `;`;
     }
 };
 
